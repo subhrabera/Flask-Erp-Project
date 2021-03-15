@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--extra-->
+<div class="page-wrapper">
+  <div class="content">
+    <div class="modal fade" id="modal-lg">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Services</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form role="form" action="/serviceinsert" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="name">Service Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Service Name"
+                      required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="category_name">Category Name</label>
+                    <select class="form-control" id="category_name" name="category_name" required>
+                      <option value="" disabled selected hidden>Select service</option>
+                      {% for row in category %}
+                      <option>{{row.category_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter Price"
+                      required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="point">Point</label>
+                    <input type="number" class="form-control" id="point" name="point" placeholder="Enter Point"
+                      required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="emp_name">Employee Name<span class="text-danger">*</span></label>
+                      <select class="form-control" id="emp_name" name="emp_name" required>
+                        <option disabled>Select Employee</option>{%for row in employee%}
+                        <option value="{{row.name}}">{{row.name}}</option>{%endfor%}
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="duration">Duration</label>
+                    <select class="form-control" name="duration" id="duration" required>
+                      <option value="">Select One</option>
+                      <option value="0:0">0:0</option>
+                      <option value="0:15">0:15</option>
+                      <option value="0:30">0:30</option>
+                      <option value="0:45">0:45</option>
+                      <option value="1:0">1:0</option>
+                      <option value="1:15">1:15</option>
+                      <option value="1:30">1:30</option>
+                      <option value="1:45">1:45</option>
+                      <option value="2:0">2:0</option>
+                      <option value="2:15">2:15</option>
+                      <option value="2:30">2:30</option>
+                      <option value="2:45">2:45</option>
+                      <option value="3:0">3:0</option>
+                      <option value="3:15">3:15</option>
+                      <option value="3:30">3:30</option>
+                      <option value="3:45">3:45</option>
+                      <option value="4:0">4:0</option>
+                      <option value="4:15">4:15</option>
+                      <option value="4:30">4:30</option>
+                      <option value="4:45">4:45</option>
+                      <option value="5:0">5:0</option>
+                      <option value="5:15">5:15</option>
+                      <option value="5:30">5:30</option>
+                      <option value="5:45">5:45</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" name="description" id="description" accept="image/*"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-3">
+        <h4 class="page-title">SERVICES</h4>
+      </div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="" class="btn btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modal-lg"><i
+            class="fa fa-plus"></i>Add Services
+        </a>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+
+      {% if messages %}
+
+      {% for message in messages %}
+
+      <div class="alert alert-success alert-dismissable" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+          <span aria-hidden="true">x</span>
+
+        </button>
+
+
+        {{message}}
+
+
+      </div>
+
+
+      {% endfor %}
+
+      {% endif %}
+      {% endwith %}
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped custom-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>SERVICES NAME</th>
+                <th>CATEGORY NAME</th>
+                <th>EMPLOYEE NAME</th>
+                <th>PRICE</th>
+                <th>POINT</th>
+                <th>DURATION</th>
+                <th>DESCRIPTION</th>
+                <th>STATUS</th>
+                <th class="text-right">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in service %}
+              <tr>
+                <td>{{row.id}}</td>
+                <td>{{row.name}}</td>
+                <td>{{row.category_name}}</td>
+                <td>{{row.emp_name}}</td>
+                <td>{{row.price}}</td>
+                <td>{{row.point}}</td>
+                <td>{{row.duration}}</td>
+                <td>{{row.description}}</td>
+                <td>{%if row.status%}<span class="custom-badge status-green">active</span>{%else%}<span
+                    class="custom-badge status-red">inactive</span>{%endif%}</td>
+                <td class="text-right">
+                  <div class="dropdown dropdown-action">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="/update/{{row.id}}" data-toggle="modal"
+                        data-target="#modaledit{{row.id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>{%if row.status%}
+
+                      <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                        data-target="#modaldelete{{row.id}}"><i class="fa fa-trash-o m-r-5"></i>Make it
+                        inactive</a>{%else%}
+                      <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                        data-target="#modaldelete{{row.id}}"><i class="fa fa-trash-o m-r-5"></i>Make it
+                        active</a>{%endif%}
+
+                    </div>
+                  </div>
+                </td>
+
+                <!---Update service Part start-->
+                <div class="modal fade" id="modaledit{{row.id}}">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Update Service</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form id="updateservice" role="form" action="/service/update/?id={{row.id}}" method="POST">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="name">Service Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                  placeholder="Enter Service Name" value="{{row.name}}">
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="category_name">Category Name</label>
+                                <select class="form-control" id="category_name" name="category_name"
+                                  value="{{row.category_name}}">
+                                  <option value="" disabled selected hidden>Select service</option>
+                                  {% for row in category %}
+                                  <option>{{row.category_name}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="price" name="price"
+                                  placeholder="Enter Price" value="{{row.price}}">
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="point">Point</label>
+                                <input type="number" class="form-control" id="point" name="point"
+                                  placeholder="Enter Point" value="{{row.point}}">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="form-group">
+                                  <label for="emp_name">Employee Name<span class="text-danger">*</span></label>
+                                  <select class="form-control" id="emp_name" name="emp_name" value="{{row.emp_name}}">
+                                    <option disabled>Select Employee</option>{%for row in employee%}
+                                    <option value="{{row.name}}">{{row.name}}</option>{%endfor%}
+                                  </select>
+                                </div>
+
+                              </div>
+                              <div class="col-lg-6">
+                                <label for="duration">Duration</label>
+                                <select class="form-control" name="duration" id="duration" value="{{row.duration}}">
+                                  <option value="">Select One</option>
+                                  <option value="0:0">0:0</option>
+                                  <option value="0:15">0:15</option>
+                                  <option value="0:30">0:30</option>
+                                  <option value="0:45">0:45</option>
+                                  <option value="1:0">1:0</option>
+                                  <option value="1:15">1:15</option>
+                                  <option value="1:30">1:30</option>
+                                  <option value="1:45">1:45</option>
+                                  <option value="2:0">2:0</option>
+                                  <option value="2:15">2:15</option>
+                                  <option value="2:30">2:30</option>
+                                  <option value="2:45">2:45</option>
+                                  <option value="3:0">3:0</option>
+                                  <option value="3:15">3:15</option>
+                                  <option value="3:30">3:30</option>
+                                  <option value="3:45">3:45</option>
+                                  <option value="4:0">4:0</option>
+                                  <option value="4:15">4:15</option>
+                                  <option value="4:30">4:30</option>
+                                  <option value="4:45">4:45</option>
+                                  <option value="5:0">5:0</option>
+                                  <option value="5:15">5:15</option>
+                                  <option value="5:30">5:30</option>
+                                  <option value="5:45">5:45</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" name="description" id="description" accept="image/*"
+                                  value="{{row.description}}"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                      </form>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- service Part end-->
+
+                <!----------------Start service Status active inactive------------------>
+                <div id="modaldelete{{row.id}}" class="modal fade delete-modal" role="dialog">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-body text-center">
+                        <img src="../../static/assets/img/sent.png" alt="" width="50" height="46">
+                        <h3>Are you sure want to inactive this service?</h3>
+                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                          <button type="button" class="btn btn-danger"
+                            onclick="location.href='/service/status/?id={{row.id}}'">INACTIVE</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!----------------End service Status active inactive------------------>
+
+              </tr>
+              <tr>
+
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block content %}
+<!--extra-->
+<div class="page-wrapper">
+  <div class="content">
+    <div class="modal fade" id="modal-lg">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Order</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form role="form" action="/inventoryinsert" method="POST">
+            <div class="card-body">
+              <!-- <div class="form-group">
+                <label for="exampleInputEmail1">Select Product</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="name"
+                  placeholder="Enter Product Name">
+              </div> -->
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Product Select</label>
+                    <select class="form-control" id="product" name="product" required>
+                      <option value="" disabled selected hidden>Select Product</option>
+                      <option value="1">TAZZA 500 ML </option>
+                      <option value="2">TAZZA 1LTR</option>
+                      <option value="3">TAZZA 5 LTR</option>
+                      <option value="4">DTM 500 ML</option>
+                      <option value="5">DTM 1 LTR </option>
+                      <option value="6">DTM 1 LTR </option>
+                      <option value="7">GOLD 500 ML</option>
+                      <option value="8">COW MILK 500 ML</option>
+                      <option value="9">COW MILK 500 ML</option>
+                      <option value="10">DAHI 200 GM</option>
+                      <option value="11">DAHI 400 GM</option>
+                      <option value="12">DHAI 1 KG </option>
+                      <option value="13">PANNER 200 GM</option>
+                      <option value="14">LASSI 180 ML</option>
+                      <option value="15">PANNER 1 KG </option>
+                      <option value="16">MISTI DHAI 85 ML CUP</option>
+                      <option value="17">SHAKTI 500ML</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label>
+                    <input class="form-control" id="date" type="date" name="date" value="2020-11-14" required>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Crate Qty.</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name="qty"
+                      placeholder="Enter Crate Qty.">
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">
+                      Unit Price</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name="unit"
+                      placeholder="Enter Price">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-3">
+        <h4 class="page-title">ORDER SUMMARY</h4>
+      </div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="" class="btn btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#modal-lg"><i
+            class="fa fa-plus"></i>Add Sales Order
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped custom-table">
+            <thead>
+              <tr>
+                <th>PRODUCT NAME</th>
+                <th>REF NO.</th>
+                <th>QTY.</th>
+                <th>PRICE</th>
+                <th>AMOUNT</th>
+                <th>CRATE</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Single</td>
+                <td>1</td>
+                <td>200</td>
+                <td>2nd Feb 2019</td>
+                <td>10000</td>
+                <td>22</td>
+                <td class="text-right">
+                  <div class="dropdown dropdown-action">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="edit-booking.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment"><i
+                          class="fa fa-trash-o m-r-5"></i> Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Single</td>
+                <td>1</td>
+                <td>200</td>
+                <td>2nd Feb 2019</td>
+                <td>10000</td>
+                <td>22</td>
+                <td class="text-right">
+                  <div class="dropdown dropdown-action">
+                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="edit-booking.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment"><i
+                          class="fa fa-trash-o m-r-5"></i> Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

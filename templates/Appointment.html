@@ -1,0 +1,365 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link type="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">New Appointment</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form role="form" action="/insert" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="name">Service Name</label>
+                                    <select class="form-control" name="name" id="name" required>
+                                        <option value="">Choose One</option>
+                                        <option value="47">Cut &amp; Finish - Man &amp; Woman</option>
+                                        <option value="53">The Face Treatment</option>
+                                        <option value="54">Body Wrap Massage</option>
+                                        <option value="56">Express Treatment</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="emp_name">Employee Name</label>
+                                        <select class="form-control" name="emp_name" id="emp_name" required>
+                                            <option value="">Choose One</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="datepick">Appointment Date</label>
+                                        <div class="cal-icon">
+                                            <input class="form-control datepick" id="datepick" type="date"
+                                                name="datepick" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="appointment_time">Appointment Time</label>
+                                        <select class="form-control" name="appointment_time" id="apointment_time_id"
+                                            required>
+                                            <option value="">Choose One</option>
+                                            <option value="1">12:00 am</option>
+                                            <option value="2">12:15 am</option>
+                                            <option value="3">12:30 am</option>
+                                            <option value="4">12:45 am</option>
+                                            <option value="5">1:00 am</option>
+                                            <option value="6">1:15 am</option>
+                                            <option value="7">1:30 am</option>
+                                            <option value="8">1:45 am</option>
+                                            <option value="9">2:00 am</option>
+                                            <option value="10">2:15 am</option>
+                                            <option value="11">2:30 am</option>
+                                            <option value="12">2:45 am</option>
+                                            <option value="13">3:00 am</option>
+                                            <option value="14">3:15 am</option>
+                                            <option value="15">3:30 am</option>
+                                            <option value="16">3:45 am</option>
+                                            <option value="17">4:00 am</option>
+                                            <option value="18">4:15 am</option>
+                                            <option value="19">4:30 am</option>
+                                            <option value="20">4:45 am</option>
+                                            <option value="21">5:00 am</option>
+                                            <option value="22">5:15 am</option>
+                                            <option value="23">5:30 am</option>
+                                            <option value="24">5:45 am</option>
+                                            <option value="25">6:00 am</option>
+                                            <option value="26">6:15 am</option>
+                                            <option value="27">6:30 am</option>
+                                            <option value="28">6:45 am</option>
+                                            <option value="29">7:00 am</option>
+                                            <option value="30">7:15 am</option>
+                                            <option value="31">7:30 am</option>
+                                            <option value="32">7:45 am</option>
+                                            <option value="33">8:00 am</option>
+                                            <option value="34">8:15 am</option>
+                                            <option value="35">8:30 am</option>
+                                            <option value="36">8:45 am</option>
+                                            <option value="37">9:00 am</option>
+                                            <option value="38">9:15 am</option>
+                                            <option value="39">9:30 am</option>
+                                            <option value="40">9:45 am</option>
+                                            <option value="41">10:00 am</option>
+                                            <option value="42">10:15 am</option>
+                                            <option value="43">10:30 am</option>
+                                            <option value="44">10:45 am</option>
+                                            <option value="45">11:00 am</option>
+                                            <option value="46">11:15 am</option>
+                                            <option value="47">11:30 am</option>
+                                            <option value="48">11:45 am</option>
+                                            <option value="49">12:00 pm</option>
+                                            <option value="50">12:15 pm</option>
+                                            <option value="51">12:30 pm</option>
+                                            <option value="52">12:45 pm</option>
+                                            <option value="53">1:00 pm</option>
+                                            <option value="54">1:15 pm</option>
+                                            <option value="55">1:30 pm</option>
+                                            <option value="56">1:45 pm</option>
+                                            <option value="57">2:00 pm</option>
+                                            <option value="58">2:15 pm</option>
+                                            <option value="59">2:30 pm</option>
+                                            <option value="60">2:45 pm</option>
+                                            <option value="61">3:00 pm</option>
+                                            <option value="62">3:15 pm</option>
+                                            <option value="63">3:30 pm</option>
+                                            <option value="64">3:45 am</option>
+                                            <option value="65">4:00 pm</option>
+                                            <option value="66">4:15 pm</option>
+                                            <option value="67">4:30 pm</option>
+                                            <option value="68">4:45 pm</option>
+                                            <option value="69">5:00 pm</option>
+                                            <option value="70">5:15 pm</option>
+                                            <option value="71">5:30 pm</option>
+                                            <option value="72">5:45 pm</option>
+                                            <option value="73">6:00 pm</option>
+                                            <option value="74">6:15 pm</option>
+                                            <option value="75">6:30 pm</option>
+                                            <option value="76">6:45 pm</option>
+                                            <option value="77">7:00 pm</option>
+                                            <option value="78">7:15 pm</option>
+                                            <option value="79">7:30 pm</option>
+                                            <option value="80">7:45 pm</option>
+                                            <option value="81">8:00 pm</option>
+                                            <option value="82">8:15 pm</option>
+                                            <option value="83">8:30 pm</option>
+                                            <option value="84">8:45 pm</option>
+                                            <option value="85">9:00 pm</option>
+                                            <option value="86">9:15 pm</option>
+                                            <option value="87">9:30 pm</option>
+                                            <option value="88">9:45 pm</option>
+                                            <option value="89">10:00 pm</option>
+                                            <option value="90">10:15 pm</option>
+                                            <option value="91">10:30 pm</option>
+                                            <option value="92">10:45 pm</option>
+                                            <option value="93">11:00 pm</option>
+                                            <option value="94">11:15 pm</option>
+                                            <option value="95">11:30 pm</option>
+                                            <option value="96">11:45 pm</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="internal_note">Internal note</label>
+                                        <input type="text" class="form-control" name="internal_note" id="internal_note"
+                                            aria-describedby="emailHelp" placeholder="Internal note">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">APPOINTMENT</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="" class="btn btn btn-primary btn-rounded float-right" data-toggle="modal"
+                    data-target="#modal-lg"><i class="fa fa-plus"></i> Add Appointment</a>
+            </div>
+            {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <div class="alert alert-success alert-dismissable" role="alert">
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                    <span aria-hidden="true">x</span>
+
+                </button>
+
+
+                {{message}}
+
+
+            </div>
+
+
+            {% endfor %}
+
+            {% endif %}
+            {% endwith %}
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>USER NAME</th>
+                                <th>USER EMAIL</th>
+                                <th>APPOINTMENT DATE</th>
+                                <th>INTERNAL NOTE</th>
+                                <th>PAYMENT GETWAY</th>
+                                <th>STATUS</th>
+                                <th class="text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in customers %}
+
+                            <tr>
+                                <td>{{row.id}} </td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.email}}</td>
+                                <td>{{row.apointment_date}}</td>
+                                <td>{{row.internal_note}}</td>
+                                <td>{{row.payment_getway}}</td>
+                                <td>{%if row.status%}<span class="custom-badge status-green">active</span>{%else%}<span
+                                        class="custom-badge status-red">inactive</span>{%endif%}</td>
+
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="/update/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaledit{{row.id}}"><i class="fa fa-pencil m-r-5"></i>
+                                                Edit</a>{%if row.status%}
+                                            <a class="dropdown-item" href="/status/{{row.id}}" data-toggle="modal"
+                                                data-target="#modalstatus{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make
+                                                it
+                                                inactive</a>{%else%}
+                                            <a class="dropdown-item" href="/status/{{row.id}}" data-toggle="modal"
+                                                data-target="#modalstatus{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make
+                                                it
+                                                active</a>{%endif%}
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!---Update Customer Part start-->
+                                <div class="modal fade" id="modaledit{{row.id}}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Customer</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="updatecustomer" role="form"
+                                                action="/customers/update/?id={{row.id}}" method="POST">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Customer Name</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                                            name="name" placeholder="enter customer name"
+                                                            value="{{row.name}}">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="mobile_number">Mobile Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="mobile_number" name="mobile_number"
+                                                                    placeholder="Enter Mobile Number"
+                                                                    value="{{row.mobile_number}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="gstin">GSTIN Number</label>
+                                                                <input type="text" class="form-control" id="gstin"
+                                                                    name="gstin" placeholder="Enter Mobile Number"
+                                                                    value="{{row.gstin}}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="address">Address</label>
+                                                        <input type="text" class="form-control" id="address"
+                                                            name="address" placeholder="Enter Address"
+                                                            value="{{row.address}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!---Update Customer Part end-->
+
+                                <!----------------Start Customer Status active inactive------------------>
+                                <div id="modalstatus{{row.id}}" class="modal fade status-modal" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <img src="../../static/assets/img/sent.png" alt="" width="50"
+                                                    height="46">
+                                                <h3>Are you sure want to inactive this customer?</h3>
+                                                <div class="m-t-20"> <a href="#" class="btn btn-white"
+                                                        data-dismiss="modal">Close</a>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="location.href='/customers/status/?id={{row.id}}'">INACTIVE</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!----------------End customer Status active inactive------------------>
+                            </tr>
+                            <tr>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block script %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datepick').datetimepicker();
+        });
+    </script>
+    {% endblock %}

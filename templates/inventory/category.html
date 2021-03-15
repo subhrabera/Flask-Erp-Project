@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content %}
+<!--extra-->
+<div class="page-wrapper">
+    <div class="content">
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Category</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form role="form" action="/categoryinsert" method="POST" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="category_name">Category Name</label>
+                                        <input type="text" class="form-control" id="category_name" name="category_name"
+                                            placeholder="Enter Category Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">CATEGORY</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="" class="btn btn btn-primary btn-rounded float-right" data-toggle="modal"
+                    data-target="#modal-lg"><i class="fa fa-plus"></i>Add Category
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <div class="alert alert-success alert-dismissable" role="alert">
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                    <span aria-hidden="true">x</span>
+
+                </button>
+
+
+                {{message}}
+
+
+            </div>
+
+
+            {% endfor %}
+
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>CATEGORY NAME</th>
+                                <th>STATUS</th>
+                                <th class="text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in category %}
+                            <tr>
+                                <td>{{row.id}}</td>
+                                <td>{{row.category_name}}</td>
+                                <td>{%if row.status%}<span class="custom-badge status-green">active</span>{%else%}<span
+                                        class="custom-badge status-red">inactive</span>{%endif%}</td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="/update/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaledit{{row.id}}"><i class="fa fa-pencil m-r-5"></i>
+                                                Edit</a>{%if row.status%}
+
+                                            <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaldelete{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make it
+                                                inactive</a>{%else%}
+                                            <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaldelete{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make it
+                                                active</a>{%endif%}
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!---Update category Part start-->
+                                <div class="modal fade" id="modaledit{{row.id}}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Category</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="updatecategory" role="form"
+                                                action="/category/update/?id={{row.id}}" method="POST">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="category_name">Category Name</label>
+                                                        <input type="text" class="form-control" id="category_name"
+                                                            name="category_name" placeholder="Enter Category Name">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- category Part end-->
+
+                                <!----------------Start category Status active inactive------------------>
+                                <div id="modaldelete{{row.id}}" class="modal fade delete-modal" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <img src="../../static/assets/img/sent.png" alt="" width="50"
+                                                    height="46">
+                                                <h3>Are you sure want to inactive this category?</h3>
+                                                <div class="m-t-20"> <a href="#" class="btn btn-white"
+                                                        data-dismiss="modal">Close</a>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="location.href='/category/status/?id={{row.id}}'">INACTIVE</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!----------------End category Status active inactive------------------>
+
+                            </tr>
+                            <tr>
+
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

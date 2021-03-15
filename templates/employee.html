@@ -1,0 +1,469 @@
+{% extends "base.html" %}
+{% block content %}
+<!--extra-->
+<div class="page-wrapper">
+    <div class="content">
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Employee Form</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form role="form" action="/employeeinsert" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">First Name</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Enter Last Name">
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="profile_image">Profile Image</label>
+                                        <input type="file" class="form-control-file" name="profile_image"
+                                            id="profile_image" accept="image/*">
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <label for="speciality">Speciality</label>
+                                        <input type="text" class="form-control" id="speciality" name="speciality">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="email">Email address</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            aria-describedby="emailHelp" placeholder="Enter Email Address" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label for="from_hours">From Hours</label>
+                                        <select class="form-control" name="from_hours" id="from_hours" required>
+                                            <option value="29">7:00 am</option>
+                                            <option value="30">7:15 am</option>
+                                            <option value="31">7:30 am</option>
+                                            <option value="32">7:45 am</option>
+                                            <option value="33">8:00 am</option>
+                                            <option value="34">8:15 am</option>
+                                            <option value="35">8:30 am</option>
+                                            <option value="36">8:45 am</option>
+                                            <option value="37">9:00 am</option>
+                                            <option value="38">9:15 am</option>
+                                            <option value="39">9:30 am</option>
+                                            <option value="40">9:45 am</option>
+                                            <option value="41">10:00 am</option>
+                                            <option value="42">10:15 am</option>
+                                            <option value="43">10:30 am</option>
+                                            <option value="44">10:45 am</option>
+                                            <option value="45">11:00 am</option>
+                                            <option value="46">11:15 am</option>
+                                            <option value="47">11:30 am</option>
+                                            <option value="48">11:45 am</option>
+                                            <option value="49">12:00 pm</option>
+                                            <option value="50">12:15 pm</option>
+                                            <option value="51">12:30 pm</option>
+                                            <option value="52">12:45 pm</option>
+                                            <option value="53">1:00 pm</option>
+                                            <option value="54">1:15 pm</option>
+                                            <option value="55">1:30 pm</option>
+                                            <option value="56">1:45 pm</option>
+                                            <option value="57">2:00 pm</option>
+                                            <option value="58">2:15 pm</option>
+                                            <option value="59">2:30 pm</option>
+                                            <option value="60">2:45 pm</option>
+                                            <option value="61">3:00 pm</option>
+                                            <option value="62">3:15 pm</option>
+                                            <option value="63">3:30 pm</option>
+                                            <option value="64">3:45 am</option>
+                                            <option value="65">4:00 pm</option>
+                                            <option value="66">4:15 pm</option>
+                                            <option value="67">4:30 pm</option>
+                                            <option value="68">4:45 pm</option>
+                                            <option value="69">5:00 pm</option>
+                                            <option value="70">5:15 pm</option>
+                                            <option value="71">5:30 pm</option>
+                                            <option value="72">5:45 pm</option>
+                                            <option value="73">6:00 pm</option>
+                                            <option value="74">6:15 pm</option>
+                                            <option value="75">6:30 pm</option>
+                                            <option value="76">6:45 pm</option>
+                                            <option value="77">7:00 pm</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="to_hours">To Hours</label>
+                                        <select class="form-control" name="to_hours" id="to_hours" required>
+                                            <option value="29">7:00 am</option>
+                                            <option value="30">7:15 am</option>
+                                            <option value="31">7:30 am</option>
+                                            <option value="32">7:45 am</option>
+                                            <option value="33">8:00 am</option>
+                                            <option value="34">8:15 am</option>
+                                            <option value="35">8:30 am</option>
+                                            <option value="36">8:45 am</option>
+                                            <option value="37">9:00 am</option>
+                                            <option value="38">9:15 am</option>
+                                            <option value="39">9:30 am</option>
+                                            <option value="40">9:45 am</option>
+                                            <option value="41">10:00 am</option>
+                                            <option value="42">10:15 am</option>
+                                            <option value="43">10:30 am</option>
+                                            <option value="44">10:45 am</option>
+                                            <option value="45">11:00 am</option>
+                                            <option value="46">11:15 am</option>
+                                            <option value="47">11:30 am</option>
+                                            <option value="48">11:45 am</option>
+                                            <option value="49">12:00 pm</option>
+                                            <option value="50">12:15 pm</option>
+                                            <option value="51">12:30 pm</option>
+                                            <option value="52">12:45 pm</option>
+                                            <option value="53">1:00 pm</option>
+                                            <option value="54">1:15 pm</option>
+                                            <option value="55">1:30 pm</option>
+                                            <option value="56">1:45 pm</option>
+                                            <option value="57">2:00 pm</option>
+                                            <option value="58">2:15 pm</option>
+                                            <option value="59">2:30 pm</option>
+                                            <option value="60">2:45 pm</option>
+                                            <option value="61">3:00 pm</option>
+                                            <option value="62">3:15 pm</option>
+                                            <option value="63">3:30 pm</option>
+                                            <option value="64">3:45 am</option>
+                                            <option value="65">4:00 pm</option>
+                                            <option value="66">4:15 pm</option>
+                                            <option value="67">4:30 pm</option>
+                                            <option value="68">4:45 pm</option>
+                                            <option value="69">5:00 pm</option>
+                                            <option value="70">5:15 pm</option>
+                                            <option value="71">5:30 pm</option>
+                                            <option value="72">5:45 pm</option>
+                                            <option value="73">6:00 pm</option>
+                                            <option value="74">6:15 pm</option>
+                                            <option value="75">6:30 pm</option>
+                                            <option value="76">6:45 pm</option>
+                                            <option value="77">7:00 pm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">EMPLOYEE</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="" class="btn btn btn-primary btn-rounded float-right" data-toggle="modal"
+                    data-target="#modal-lg"><i class="fa fa-plus"></i>Add Employee
+                </a>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <div class="alert alert-success alert-dismissable" role="alert">
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                    <span aria-hidden="true">x</span>
+
+                </button>
+
+
+                {{message}}
+
+
+            </div>
+
+
+            {% endfor %}
+
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FIRST NAME</th>
+                                <th>EMAIL</th>
+                                <!-- <th>PROFILE IMAGE</th> -->
+                                <th>FROM HOURS</th>
+                                <th>TO HOURS</th>
+                                <th>SPECIALITY</th>
+                                <th>STATUS</th>
+                                <th class="text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in employee %}
+                            <tr>
+                                <td>{{row.id}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.email}}</td>
+                                <!-- <td>{{row.profile_img}}</td> -->
+                                <td>{{row.from_hours}}</td>
+                                <td>{{row.to_hours}}</td>
+                                <td>{{row.speciality}}</td>
+                                <td>{%if row.status%}<span class="custom-badge status-green">active</span>{%else%}<span
+                                        class="custom-badge status-red">inactive</span>{%endif%}</td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="/update/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaledit{{row.id}}"><i class="fa fa-pencil m-r-5"></i>
+                                                Edit</a>{%if row.status%}
+
+                                            <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaldelete{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make it
+                                                inactive</a>{%else%}
+                                            <a class="dropdown-item" href="/delete/{{row.id}}" data-toggle="modal"
+                                                data-target="#modaldelete{{row.id}}"><i
+                                                    class="fa fa-trash-o m-r-5"></i>Make it
+                                                active</a>{%endif%}
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!---Update Employee Part start-->
+                                <div class="modal fade" id="modaledit{{row.id}}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Employee</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="updateemployee" role="form"
+                                                action="/employee/update/?id={{row.id}}" method="POST">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="name">First Name</label>
+                                                                <input type="text" class="form-control" id="name"
+                                                                    name="name" placeholder="Enter Last Name"
+                                                                    value="{{row.name}}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <label for="speciality">Speciality</label>
+                                                                <input type="text" class="form-control" id="speciality"
+                                                                    name="speciality" value="{{row.speciality}}">
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <label for="email">Email address</label>
+                                                                <input type="email" class="form-control" name="email"
+                                                                    id="email" aria-describedby="emailHelp"
+                                                                    placeholder="Enter Email Address"
+                                                                    value="{{row.email}}" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <label for="from_hours">From Hours</label>
+                                                                <select class="form-control" name="from_hours"
+                                                                    id="from_hours" value="{{row.from_hours}}" required>
+                                                                    <option value="29">7:00 am</option>
+                                                                    <option value="30">7:15 am</option>
+                                                                    <option value="31">7:30 am</option>
+                                                                    <option value="32">7:45 am</option>
+                                                                    <option value="33">8:00 am</option>
+                                                                    <option value="34">8:15 am</option>
+                                                                    <option value="35">8:30 am</option>
+                                                                    <option value="36">8:45 am</option>
+                                                                    <option value="37">9:00 am</option>
+                                                                    <option value="38">9:15 am</option>
+                                                                    <option value="39">9:30 am</option>
+                                                                    <option value="40">9:45 am</option>
+                                                                    <option value="41">10:00 am</option>
+                                                                    <option value="42">10:15 am</option>
+                                                                    <option value="43">10:30 am</option>
+                                                                    <option value="44">10:45 am</option>
+                                                                    <option value="45">11:00 am</option>
+                                                                    <option value="46">11:15 am</option>
+                                                                    <option value="47">11:30 am</option>
+                                                                    <option value="48">11:45 am</option>
+                                                                    <option value="49">12:00 pm</option>
+                                                                    <option value="50">12:15 pm</option>
+                                                                    <option value="51">12:30 pm</option>
+                                                                    <option value="52">12:45 pm</option>
+                                                                    <option value="53">1:00 pm</option>
+                                                                    <option value="54">1:15 pm</option>
+                                                                    <option value="55">1:30 pm</option>
+                                                                    <option value="56">1:45 pm</option>
+                                                                    <option value="57">2:00 pm</option>
+                                                                    <option value="58">2:15 pm</option>
+                                                                    <option value="59">2:30 pm</option>
+                                                                    <option value="60">2:45 pm</option>
+                                                                    <option value="61">3:00 pm</option>
+                                                                    <option value="62">3:15 pm</option>
+                                                                    <option value="63">3:30 pm</option>
+                                                                    <option value="64">3:45 am</option>
+                                                                    <option value="65">4:00 pm</option>
+                                                                    <option value="66">4:15 pm</option>
+                                                                    <option value="67">4:30 pm</option>
+                                                                    <option value="68">4:45 pm</option>
+                                                                    <option value="69">5:00 pm</option>
+                                                                    <option value="70">5:15 pm</option>
+                                                                    <option value="71">5:30 pm</option>
+                                                                    <option value="72">5:45 pm</option>
+                                                                    <option value="73">6:00 pm</option>
+                                                                    <option value="74">6:15 pm</option>
+                                                                    <option value="75">6:30 pm</option>
+                                                                    <option value="76">6:45 pm</option>
+                                                                    <option value="77">7:00 pm</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <label for="to_hours">To Hours</label>
+                                                                <select class="form-control" name="to_hours"
+                                                                    id="to_hours" value="{{row.to_hours}}" required>
+                                                                    <option value="29">7:00 am</option>
+                                                                    <option value="30">7:15 am</option>
+                                                                    <option value="31">7:30 am</option>
+                                                                    <option value="32">7:45 am</option>
+                                                                    <option value="33">8:00 am</option>
+                                                                    <option value="34">8:15 am</option>
+                                                                    <option value="35">8:30 am</option>
+                                                                    <option value="36">8:45 am</option>
+                                                                    <option value="37">9:00 am</option>
+                                                                    <option value="38">9:15 am</option>
+                                                                    <option value="39">9:30 am</option>
+                                                                    <option value="40">9:45 am</option>
+                                                                    <option value="41">10:00 am</option>
+                                                                    <option value="42">10:15 am</option>
+                                                                    <option value="43">10:30 am</option>
+                                                                    <option value="44">10:45 am</option>
+                                                                    <option value="45">11:00 am</option>
+                                                                    <option value="46">11:15 am</option>
+                                                                    <option value="47">11:30 am</option>
+                                                                    <option value="48">11:45 am</option>
+                                                                    <option value="49">12:00 pm</option>
+                                                                    <option value="50">12:15 pm</option>
+                                                                    <option value="51">12:30 pm</option>
+                                                                    <option value="52">12:45 pm</option>
+                                                                    <option value="53">1:00 pm</option>
+                                                                    <option value="54">1:15 pm</option>
+                                                                    <option value="55">1:30 pm</option>
+                                                                    <option value="56">1:45 pm</option>
+                                                                    <option value="57">2:00 pm</option>
+                                                                    <option value="58">2:15 pm</option>
+                                                                    <option value="59">2:30 pm</option>
+                                                                    <option value="60">2:45 pm</option>
+                                                                    <option value="61">3:00 pm</option>
+                                                                    <option value="62">3:15 pm</option>
+                                                                    <option value="63">3:30 pm</option>
+                                                                    <option value="64">3:45 am</option>
+                                                                    <option value="65">4:00 pm</option>
+                                                                    <option value="66">4:15 pm</option>
+                                                                    <option value="67">4:30 pm</option>
+                                                                    <option value="68">4:45 pm</option>
+                                                                    <option value="69">5:00 pm</option>
+                                                                    <option value="70">5:15 pm</option>
+                                                                    <option value="71">5:30 pm</option>
+                                                                    <option value="72">5:45 pm</option>
+                                                                    <option value="73">6:00 pm</option>
+                                                                    <option value="74">6:15 pm</option>
+                                                                    <option value="75">6:30 pm</option>
+                                                                    <option value="76">6:45 pm</option>
+                                                                    <option value="77">7:00 pm</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- Employee Part end-->
+
+                                <!----------------Start employee Status active inactive------------------>
+                                <div id="modaldelete{{row.id}}" class="modal fade delete-modal" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <img src="../../static/assets/img/sent.png" alt="" width="50"
+                                                    height="46">
+                                                <h3>Are you sure want to inactive this employee?</h3>
+                                                <div class="m-t-20"> <a href="#" class="btn btn-white"
+                                                        data-dismiss="modal">Close</a>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="location.href='/employee/status/?id={{row.id}}'">INACTIVE</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!----------------End employee Status active inactive------------------>
+
+                            </tr>
+                            <tr>
+
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

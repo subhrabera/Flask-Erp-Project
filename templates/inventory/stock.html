@@ -1,0 +1,451 @@
+{% extends "template.html" %}
+{% block content %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Order</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Order</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="button">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-xl">
+                                Add Order
+                            </button>
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-success alert-dismissable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <div class="modal fade" id="modal-xl">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary">
+                                            <h4 class="modal-title ">Add Order</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="customer" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Csutomer Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="customer">
+                                                                {% for row in customers %}
+                                                                <option value="{{row.id}}" name="customer">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+                                                        <div class="form-group">
+                                                            <label for="address">Address</label>
+                                                            <input type="text" class="form-control" id="address"
+                                                                name="address" readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Date:</label>
+                                                            <div class="input-group date" id="reservationdate"
+                                                                data-target-input="nearest">
+                                                                <input type="text"
+                                                                    class="form-control datetimepicker-input"
+                                                                    data-target="#reservationdate" />
+                                                                <div class="input-group-append"
+                                                                    data-target="#reservationdate"
+                                                                    data-toggle="datetimepicker">
+                                                                    <div class="input-group-text"><i
+                                                                            class="fa fa-calendar"></i></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.form-group -->
+                                                        <div class="form-group">
+                                                            <label for="mobile">Mobile Number</label>
+                                                            <input type="text" class="form-control" id="mobile"
+                                                                name="mobile" readOnly>
+                                                        </div>
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+
+                                                <div class="row" id="1">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="product1">
+                                                                {% for row in products %}
+                                                                <option value="{{row.name}}" name="product1">
+                                                                    {{row.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty" name="qty">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="number" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control" id="price1"
+                                                                name="price1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount"
+                                                                readOnly></input>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+
+                                                <div class="row" id="2" style="display:none">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="products">
+                                                                {% for row in products %}
+                                                                <option value="{{row.id}}" name="products">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control" id="price2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount2"
+                                                                readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+
+                                                <div class="row" id="3" style="display:none">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="products">
+                                                                {% for row in products %}
+                                                                <option value="{{row.id}}" name="products">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty3">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control" id="price3">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount3"
+                                                                readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+
+                                                <div class="row" id="4" style="display:none">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="products">
+                                                                {% for row in products %}
+                                                                <option value="{{row.id}}" name="products">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty4">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control" id="price4">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount4"
+                                                                readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+
+                                                <div class="row" id="5" style="display:none">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="products">
+                                                                {% for row in products %}
+                                                                <option value="{{row.id}}" name="products">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty5">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control" id="price5">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount5"
+                                                                readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+
+                                                <div class="row" id="2" style="display:none">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Product Name</label>
+                                                            <select class="form-control select2" style="width: 100%;"
+                                                                name="product">
+                                                                {% for row in products %}
+                                                                <option value="{{row.id}}" name="product">{{row.name}}
+                                                                </option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+
+                                                        <!-- /.form-group -->
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Current Quantity</label>
+                                                            <input type="text" class="form-control" id="qty6">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Order Quantity</label>
+                                                            <input type="text" class="form-control" id="price6">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Price</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleInputtext1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Amount</label>
+                                                            <input type="text" class="form-control" id="amount6"
+                                                                readOnly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+
+                                                <!-- /. row -->
+                                                <a class="btn bg-primary" onclick="AddLine()"
+                                                    style="width:90px;height:40px;">Add Line</a>
+                                                <a class="btn bg-danger" onclick="RemoveLine()"
+                                                    style="width:130px;height:40px;">Remove Line</a>
+
+                                        </div>
+                                        <span id="total"></span>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-primary float-right">Save
+                                                changes</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                </form>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Product Name</th>
+                                            <th>Current Quantity</th>
+                                            <th>Order Quantity</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in products %}
+                                        <tr>
+                                            <td>{{row.id}}</td>
+                                            <td>{{row.name}}</td>
+                                            <td>{{row.qty}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+{% endblock %}
+{% block script %}
+<script type=text/javascript>
+$("#customer").on("change", function (a) {
+    a.preventDefault();
+    var b = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: "/getdata",
+        data: b,
+        success: function (c) {
+            1 == c.success
+                ? ($("#address").val(c.address),$("#mobile").val(c.mobile),$("#price1").val(c.price1))
+                : ($("#msgvehicle").css({ display: "block", "background-color": "#FFD2D2", color: "#D8000C" }), $("#msgvehicle").text(c.msg));
+        },
+        error: function (c) {
+            $("#msgvehicle").text(c.msg);
+        },
+    });
+});
+
+
+</script>
+{% endblock %}

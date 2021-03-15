@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+{% block title %}
+Dashboard
+{% endblock %}
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+          <div class="row no-gutters">
+            <div class="col-5">
+              <div class="circle1"></div>
+            </div>
+            <div class="col-7">
+              <div class="dash-widget-info text-right">
+                <h3>75</h3>
+                <span class="widget-title1">Total Revenue</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+          <div class="row no-gutters">
+            <div class="col-5">
+              <div class="circle2"></div>
+            </div>
+            <div class="col-7">
+              <div class="dash-widget-info text-right">
+                <h3>25</h3>
+                <span class="widget-title2">Total Booking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+          <div class="row no-gutters">
+            <div class="col-5">
+              <div class="circle3"></div>
+            </div>
+            <div class="col-7">
+              <div class="dash-widget-info text-right">
+                <h3>20</h3>
+                <span class="widget-title3">Total Employee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+          <div class="row no-gutters">
+            <div class="col-5">
+              <div class="circle4"></div>
+            </div>
+            <div class="col-7">
+              <div class="dash-widget-info text-right">
+                <h3>$ 6000</h3>
+                <span class="widget-title4">Total Services</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title d-inline-block">Income and Expenses</h4>
+          </div>
+          <div>
+            <canvas id="myChart"></canvas>
+            <div class="card-footer">
+              <p>This chart shows Income and Expenses</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-lg-12 col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title d-inline-block">Visitors</h4>
+          </div>
+          <div id="visit-area"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

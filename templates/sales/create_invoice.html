@@ -1,0 +1,426 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="/static/assets/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Create Invoice</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <form id=billing method="POST" enctype="multipart/form-data">
+                    <div style="margin:auto">
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <th colspan="2">
+                                    <p class="billing">Customer Name</p>
+                                </th>
+                                <td colspan="3"><select class="form-control" id="customer" name="customer" required>
+                                        <option value="" disabled selected hidden>Select Customer</option>
+                                        {%if customers%}{%for customer in customers%}
+                                        <option value="{{customer.id}}">{{customer.name}}</option>{%endfor%}{%else%}
+                                        <option value="" disabled>No matches found</option>{%endif%}
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <p class="billing">Full Address</p>
+                                </th>
+                                <td colspan="3"><input class="form-control billing" id="c_address" type="text"
+                                        name="address" placeholder="Enter full address" required></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <p class="billing">Invoice&nbsp;No.</p>
+                                </th>
+                                <td colspan="3"><input class="form-control billing" id="invno" type="text" name="invno"
+                                        value="{{invno}}" placeholder="Enter invoice no" required></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <p class="billing">Invoice&nbsp;Date.</p>
+                                </th>
+                                <td colspan="3"><input class="form-control billing" id="invdate" type="date"
+                                        name="invdate" placeholder="date" required></td>
+                            </tr>
+                        </table>
+                        <table class="table table-sm table-bordered" id="ta">
+                            <thead>
+                                <tr>
+                                    <th class="checkbox-column"></th>
+                                    <th>
+                                        <p class="billing">PRODUCT</p>
+                                    </th>
+                                    <th>
+                                        <p class="billing">CRATE</p>
+                                    </th>
+                                    <th>
+                                        <p class="billing">PC</p>
+                                    </th>
+                                    <th>
+                                        <p class="billing">AMOUNT&nbsp;Rs.</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_1" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_1" name="product_1" required>
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if services%}{%for service in services%}
+                                            <option value="{{service.id}}">{{service.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_1" type="number" step="any" name="crate_1"
+                                            value="0" placeholder="Enter Crate." required></td>
+                                    <td><input class="form-control" id="pc_1" type="number" step="any" name="pc_1"
+                                            value="0" placeholder="Enter PC." required></td>
+                                    <td><input class="form-control" id="amount_1" type="number" step="any"
+                                            name="amount_1" value="0" placeholder="Enter Amount." required></td>
+                                </tr>
+                                <tr id="2" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_2" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_2" name="product_2">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_2" type="number" step="any" name="crate_2"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_2" type="number" step="any" name="pc_2"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_2" type="number" step="any"
+                                            name="amount_2" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="3" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_3" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_3" name="product_3">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_3" type="number" step="any" name="crate_3"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_3" type="number" step="any" name="pc_3"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_3" type="number" step="any"
+                                            name="amount_3" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="4" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_4" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_4" name="product_4">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_4" type="number" step="any" name="crate_4"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_4" type="number" step="any" name="pc_4"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_4" type="number" step="any"
+                                            name="amount_4" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="5" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_5" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_5" name="product_5">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_5" type="number" step="any" name="crate_5"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_5" type="number" step="any" name="pc_5"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_5" type="number" step="any"
+                                            name="amount_5" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="6" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_6" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_6" name="product_6">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_6" type="number" step="any" name="crate_6"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_6" type="number" step="any" name="pc_6"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_6" type="number" step="any"
+                                            name="amount_6" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="7" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_7" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_7" name="product_7">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_7" type="number" step="any" name="crate_7"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_7" type="number" step="any" name="pc_7"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_7" type="number" step="any"
+                                            name="amount_7" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="8" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_8" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_8" name="product_8">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_8" type="number" step="any" name="crate_8"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_8" type="number" step="any" name="pc_8"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_8" type="number" step="any"
+                                            name="amount_8" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="9" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_9" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_9" name="product_9">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_9" type="number" step="any" name="crate_9"
+                                            value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_9" type="number" step="any" name="pc_9"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_9" type="number" step="any"
+                                            name="amount_9" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                                <tr id="10" style="display:none">
+                                    <td class="checkbox-column">
+                                        <label class="new-control new-checkbox checkbox-primary"
+                                            style="height:18px;margin:0 auto">
+                                            <input type="checkbox" class="new-control-input todochkbox"
+                                                name="editable_10" id="todo-1">
+                                            <span class="new-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td><select class="form-control" id="product_10" name="product_10">
+                                            <option value="" disabled selected hidden>Select Product</option>
+                                            {%if products%}{%for product in products%}
+                                            <option value="{{product.id}}">{{product.name}}</option>{%endfor%}{%else%}
+                                            <option value="" disabled>No matches found</option>{%endif%}
+                                        </select></td>
+                                    <td><input class="form-control" id="crate_10" type="number" step="any"
+                                            name="crate_10" value="0" placeholder="Enter Crate."></td>
+                                    <td><input class="form-control" id="pc_10" type="number" step="any" name="pc_10"
+                                            value="0" placeholder="Enter PC."></td>
+                                    <td><input class="form-control" id="amount_10" type="number" step="any"
+                                            name="amount_10" value="0" placeholder="Enter Amount."></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <td colspan="3">
+                                    <div class="input-group mb-4">
+                                        <input class="form-control billing" id="payble" type="text" name="payble"
+                                            placeholder="Enter total amount" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"
+                                                onclick='calculate()'>CALCULATE</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group mb-4"><button id="addbtn" class="btn btn-dark btn-lg"
+                                            style="float:right" type="button" onclick="AddLine()">Add New Line</button>
+                                    </div>
+                                </td>
+                                <td style="float:right">
+                                    <div class="input-group mb-4"><button id="rmbtn" class="btn btn-danger btn-lg"
+                                            type="button" onclick="RemoveLine()">Remove Line</button></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <p class="billing"><strong>In word : </strong><input class="form-control billing"
+                                            id="inwords" type="text" name="inwords" readonly></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input class="form-control billing" id="c_issued" type="number"
+                                        name="c_issued" placeholder="CRATE ISSUED"></td>
+                                <td colspan="1"><input class="form-control billing" id="c_return" type="number"
+                                        name="c_return" placeholder="CRATE RETURNED"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="form-row mb-4">
+                        <div class="col-md-12">
+                            <p id=msg class=error-msg></p>
+                        </div>
+                    </div>
+                    <button type="submit" class="submitBtn btn btn-primary mt-3">Save</button>
+                    <button type="button" class="btn btn-light mt-3"
+                        onclick="location.href='/invoicing/'">Discard</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/assets/js/moment.min.js"></script>
+<script src="/static/assets/js/select2.min.js"></script>
+<script src="/static/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+    function calculate() {
+        $("#billing").trigger("change");
+    }
+    var i = 1;
+    $("#ta tbody").on("change", function () {
+        checkid();
+    });
+    function checkid() {
+        (document.getElementById("rmbtn").disabled = 1 == i), (document.getElementById("addbtn").disabled = 10 == i), calculate();
+    }
+    function AddLine() {
+        (document.getElementById(++i).style.display = ""), checkid();
+    }
+    function RemoveLine() {
+        (document.getElementById(i).style.display = "none"), $("#" + i + " td input").val("0"), i--, checkid();
+    }
+    (document.getElementById("rmbtn").disabled = 1 == i), (document.getElementById("addbtn").disabled = 10 == i);
+
+</script>
+
+<script type=text/javascript>
+$("#billing").on("submit", function (a) {
+    a.preventDefault();
+    var b = $(this).serialize();
+    $(".submitBtn").attr("disabled", true);
+    $.ajax({
+        type: "POST",
+        url: "/invoicing/create/",
+        data: b,
+        success: function (c) {
+            1 == c.success
+                ? ($("#msg").css({ display: "block", "background-color": "#DFF2BF", color: "#4F8A10" }), $("#msg").text(c.msg), (location.href = "/" + c.url))
+                : ($(".submitBtn").attr("disabled", false), $("#msg").css({ display: "block", "background-color": "#FFD2D2", color: "#D8000C" }), $("#msg").text(c.msg));
+        },
+        error: function (c) {
+            $("#msg").text(c.msg);
+        },
+    });
+});
+</script>
+
+<script type="text/javascript">
+    $("#billing").on("change", function (b) {
+        b.preventDefault();
+        var c = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "/invoice-cal",
+            data: c,
+            success: function (d) {
+                1 == d.success
+                    ? ($("#msg").css({ display: "none" }),
+                        $("#c_address").val(d.address),
+                        $("#amount_1").val(d.amount_1),
+                        $("#amount_2").val(d.amount_2),
+                        $("#amount_3").val(d.amount_3),
+                        $("#amount_4").val(d.amount_4),
+                        $("#amount_5").val(d.amount_5),
+                        $("#amount_6").val(d.amount_6),
+                        $("#amount_7").val(d.amount_7),
+                        $("#amount_8").val(d.amount_8),
+                        $("#amount_9").val(d.amount_9),
+                        $("#amount_10").val(d.amount_10),
+                        $("#payble").val(d.payble),
+                        $("#inwords").val(d.inwords))
+                    : ($("#msg").css({ display: "block", "background-color": "#FFD2D2", color: "#D8000C" }), $("#msg").text(d.msg));
+            },
+            error: function (d) {
+                $("#msg").text(d.msg);
+            },
+        });
+    });
+
+</script>
+{% endblock %}
